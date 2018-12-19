@@ -56,7 +56,7 @@ void setup() {
  * Set the file name and write the description in the file.  
  *********************************************/
   smartDelay(1000);
-  fileName = "drone";
+  fileName = "droneTs"; // file name must be less than 8 characters.
   
   File dataFile = SD.open( fileName + ".txt", FILE_WRITE);  
   if(dataFile){
@@ -71,7 +71,7 @@ void setup() {
 
 void loop() {
   
-  smartDelay(1000);
+  smartDelay(100); // First(before the robot catch the GPS), the time is better longer than 1000ms
 /******************************************
  * Write the sensor information in the file
 ******************************************/ 
