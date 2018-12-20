@@ -75,3 +75,7 @@ https://github.com/mikalhart/TinyGPSPlus
 
 上の１つのコネクタがシリアル通信用(GPS)で、
 下の3つのコネクタがI2C通信用(3.3V)(BME280,MLX90614,MPU9250)である。
+
+## パラシュート作成方法
+パラシュートは下記URLを参考に作成します。
+http://fusenucyu.com/5611
