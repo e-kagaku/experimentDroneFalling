@@ -79,3 +79,8 @@ https://github.com/mikalhart/TinyGPSPlus
 ## パラシュート作成方法
 パラシュートは下記URLを参考に作成します。
 http://fusenucyu.com/5611
+
+<!-- ## 次回への展望
+- 5V変換器をつけて9Dコンパスで姿勢確認
+- リセットされるのをなおす
+- トグルボタンをつける -->
