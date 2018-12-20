@@ -2,7 +2,7 @@
 ### ドローンからの落下実験 データ収集Arduino
 written on 2018/12/19, by Yuta Nakamoto
 
-![body_arduino](img/body_arduino2.jpg =400x)
+![body_arduino](img/body_arduino2.jpg)
 
 ## 観測内容
 以下のリストをArduinoで観測している。
