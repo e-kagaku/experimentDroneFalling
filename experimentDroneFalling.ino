@@ -1,6 +1,6 @@
 
 /* Outline *******************************************
- * Experiment that the robot was fallen from the drone. 
+ * Experiment that the robot was fallen from the drone.
  * And the robot also observes location, altitude, temperature, atitude.
 *****************************************************/
 
@@ -21,7 +21,7 @@
 #include <SparkFunMLX90614.h> // SparkFunMLX90614 Arduino library
 //#include <Adafruit_BNO055.h> // BN055 library
 
-#include <SoftwareSerial.h> 
+#include <SoftwareSerial.h>
 #include <TinyGPS++.h> // GPS library
 #include <SPI.h>
 #include <SD.h>
@@ -38,7 +38,7 @@ bool statusBme,statusTherm,statusGps,statusSD;
 String fileName;
 
 
-void setup() {  
+void setup() {
 /**********************************************
  * All sensors initialize and check the error.
 **********************************************/
@@ -49,16 +49,16 @@ void setup() {
   statusSD = SD.begin(chipSelect);
   statusTherm = therm.begin(); // Initialize thermal IR sensor
   therm.setUnit(TEMP_C);
-  //  status_bno055 = bno.begin();  
+  //  status_bno055 = bno.begin();
   errorCheck;
 
-/********************************************** 
- * Set the file name and write the description in the file.  
+/**********************************************
+ * Set the file name and write the description in the file.
  *********************************************/
   smartDelay(1000);
   fileName = "droneTs"; // file name must be less than 8 characters.
-  
-  File dataFile = SD.open( fileName + ".txt", FILE_WRITE);  
+
+  File dataFile = SD.open( fileName + ".txt", FILE_WRITE);
   if(dataFile){
     dataFile.println("Time,Latitude,Longitude,Altitude_GPS,Altitude_BME280,Humidity,Temperature,X-orientation,Y-orientation,Z-orientation");
     dataFile.close();
@@ -70,11 +70,11 @@ void setup() {
 }
 
 void loop() {
-  
+
   smartDelay(100); // First(before the robot catch the GPS), the time is better longer than 1000ms
 /******************************************
  * Write the sensor information in the file
-******************************************/ 
+******************************************/
   File dataFile = SD.open( fileName + ".txt",FILE_WRITE);
   if(dataFile && therm.read()){
 //    Serial.println("Now writing file");
@@ -86,41 +86,45 @@ void loop() {
     dataFile.print(",");
     dataFile.print(tinyGPS.altitude.meters()); // Altitude(GPS)
     dataFile.print(",");
-    dataFile.print(bme.readAltitude(SEALEVELPRESSURE_HPA)); // Altitude(BME280) 
+    dataFile.print(bme.readAltitude(SEALEVELPRESSURE_HPA)); // Altitude(BME280)
     dataFile.print(",");
     dataFile.print(bme.readHumidity());  // Humidity(BME280)
     dataFile.print(",");
+    dataFile.print(bme.readTemperature());  // Temperature(BME280)
+    dataFile.print(",");
     dataFile.print(therm.ambient()); // Temperature(MLX90614)
     dataFile.print(",");
-    dataFile.print(tinyGPS.altitude.meters());  // Atitude(MPU9250)
-    dataFile.print(",");
-    dataFile.print(tinyGPS.altitude.meters());  // Atitude(MPU9250)
-    dataFile.print(",");
-    dataFile.println(tinyGPS.altitude.meters()); // Atitude(MPU9250)             
+    // dataFile.print(tinyGPS.altitude.meters());  // Atitude(MPU9250)
+    // dataFile.print(",");
+    // dataFile.print(tinyGPS.altitude.meters());  // Atitude(MPU9250)
+    // dataFile.print(",");
+    // dataFile.println(tinyGPS.altitude.meters()); // Atitude(MPU9250)
   }
-  dataFile.close();  
-  
+  dataFile.close();
+
 /******************************************
  * Show the sensor information in Serial monitor.
-******************************************/ 
+******************************************/
 //  therm.read();
 //  Serial.print(convertUtcToJst());
 //  Serial.print(",");
-//  Serial.print(tinyGPS.location.lat(),6);    
+//  Serial.print(tinyGPS.location.lat(),6);
 //  Serial.print(",");
-//  Serial.print(tinyGPS.location.lng(),6);    
+//  Serial.print(tinyGPS.location.lng(),6);
 //  Serial.print(",");
-//  Serial.print(tinyGPS.altitude.meters());    
+//  Serial.print(tinyGPS.altitude.meters());
 //  Serial.print(",");
-//  Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));    
+//  Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
 //  Serial.print(",");
-//  Serial.print(bme.readHumidity());    
+//  Serial.print(bme.readHumidity());
+//  Serial.print(",");
+//  Serial.print(bme.readTemperature());
 //  Serial.print(",");
 //  Serial.print(therm.ambient());
 //  Serial.print(",");
-//  Serial.print(tinyGPS.altitude.meters());    
+//  Serial.print(tinyGPS.altitude.meters());
 //  Serial.print(",");
-//  Serial.print(tinyGPS.altitude.meters());    
+//  Serial.print(tinyGPS.altitude.meters());
 //  Serial.print(",");
 //  Serial.println(tinyGPS.altitude.meters());
 //  Serial.print("OK!");
