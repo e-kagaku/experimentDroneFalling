@@ -13,8 +13,11 @@ written on 2018/12/19, by Yuta Nakamoto
 
 ## 使用部品
 以下に使用した部品をまとめる。
-- Arduino
+- Arduino Uno
 - SeedStudio製 SDカードシールドV4 SEEED-103030005  
 https://www.switch-science.com/catalog/1292/
 - Arduino R3 互換 プロトシールド キット （プロトタイプシールド キット）  
 https://www.amazon.co.jp/Arduino-プロトシールド-キット-（プロトタイプシールド-キット）/dp/B00LP9CT22
+- BME280使用 温湿度・気圧センサーモジュールキット  http://akizukidenshi.com/catalog/g/gK-09421/
+- GPS受信機キット 1pps出力付き 「みちびき」対応  http://akizukidenshi.com/catalog/g/gK-09991/
+- 赤外線温度センサーMLX90614  https://strawberry-linux.com/catalog/items?code=18120
