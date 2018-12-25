@@ -60,7 +60,7 @@ void setup() {
 
   File dataFile = SD.open( fileName + ".txt", FILE_WRITE);
   if(dataFile){
-    dataFile.println("Time,Latitude,Longitude,Altitude_GPS,Altitude_BME280,Humidity,Temperature,X-orientation,Y-orientation,Z-orientation");
+    dataFile.println(",Date,Time,Latitude,Longitude,Altitude_GPS,Altitude_BME280,Humidity,Temperature,X-orientation,Y-orientation,Z-orientation");
     dataFile.close();
 //    Serial.println("Time,Latitude,Longitude,Altitude_GPS,Altitude_BME280,Humidity,Temperature,X-orientation,Y-orientation,Z-orientation");
   }
@@ -76,9 +76,11 @@ void loop() {
  * Write the sensor information in the file
 ******************************************/
   File dataFile = SD.open( fileName + ".txt",FILE_WRITE);
-  if(dataFile && therm.read()){
+  if(dataFile){
 //    Serial.println("Now writing file");
-    dataFile.print(convertUtcToJst()); // Date & Time(GPS)
+    dataFile.print(tinyGPS.date.value()); // Date in DDMMYY format(GPS)
+    dataFile.print(",");
+    dataFile.print(tinyGPS.time.value()); // Time in HHMMSSCC format(GPS)
     dataFile.print(",");
     dataFile.print(tinyGPS.location.lat(),6);  // Latitude(GPS)
     dataFile.print(",");
@@ -106,7 +108,9 @@ void loop() {
  * Show the sensor information in Serial monitor.
 ******************************************/
 //  therm.read();
-//  Serial.print(convertUtcToJst());
+//  Serial.print(tinyGPS.date.value()); // Date in DDMMYY format(GPS)
+//  Serial.print(",");
+//  Serial.print(tinyGPS.time.value()); // Time in HHMMSSCC format(GPS)
 //  Serial.print(",");
 //  Serial.print(tinyGPS.location.lat(),6);
 //  Serial.print(",");
@@ -130,3 +134,58 @@ void loop() {
 //  Serial.print("OK!");
 
 }
+/*----------- End of main file  ---------------*/
+
+
+
+/******************************************
+ * Not used function (for debug or something)
+******************************************/
+// String convertUtcToJst(){
+//   int day1,hour1;
+//   String DTstring ="";
+//
+//   day1=tinyGPS.date.day();
+//   hour1=tinyGPS.time.hour();
+//   if(hour1+9>24){
+//     day1=day1+1;
+//     hour1=hour1-15;
+//     }
+//
+//   DTstring += String(tinyGPS.date.year());
+//   DTstring += String("/");
+//   DTstring += String(tinyGPS.date.month());
+//   DTstring += String("/");
+//   DTstring += String(day1);
+//   DTstring += String(",");
+//   DTstring += String(hour1);
+//   DTstring += String(":");
+//   DTstring += String(tinyGPS.time.minute());
+//   DTstring += String(":");
+//   DTstring += String(tinyGPS.time.second());
+//
+//   return DTstring;
+//
+// }
+/*
+ * Convert UTC time to JST time
+*/
+//
+// String utcToJst(int utcDay, int utcHour){
+//   int jstDay = 0;
+//   int jstHour = 0;
+//   String jstData;
+//
+//   if(utcHour+9 < 24){
+//     jstDay = utcDay;
+//     jstHour = utcHour+9;
+//   }
+//   else{
+//     jstDay = utcDay + 1;
+//     jstHour = utcHour - 15;
+//   }
+//
+//   jstData = String(jstDay) + "_" +  String(jstHour);
+//   return jstData;
+//
+//   }
