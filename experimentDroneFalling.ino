@@ -60,7 +60,7 @@ void setup() {
 
   File dataFile = SD.open( fileName + ".txt", FILE_WRITE);
   if(dataFile){
-    dataFile.println(",Date,Time,Latitude,Longitude,Altitude_GPS,Altitude_BME280,Humidity,Temperature,X-orientation,Y-orientation,Z-orientation");
+    dataFile.println("Date,Time,Latitude,Longitude,Altitude_GPS,Altitude_BME280,Humidity,Temperature_bme,Temperature_therm,X-orientation,Y-orientation,Z-orientation");
     dataFile.close();
 //    Serial.println("Time,Latitude,Longitude,Altitude_GPS,Altitude_BME280,Humidity,Temperature,X-orientation,Y-orientation,Z-orientation");
   }
