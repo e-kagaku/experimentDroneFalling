@@ -1,2 +1,4 @@
 Matlab/data
 *.asv
+*.fig
+*.txt
