@@ -42,7 +42,7 @@ void setup() {
 /**********************************************
  * All sensors initialize and check the error.
 **********************************************/
-//  Serial.begin(9600);
+  Serial.begin(9600);
   gps.begin(9600);
   statusGps = gps.available();
   statusBme = bme.begin();
@@ -56,7 +56,7 @@ void setup() {
  * Set the file name and write the description in the file.
  *********************************************/
   smartDelay(1000);
-  fileName = "droneTs"; // file name must be less than 8 characters.
+  fileName = "Ts3"; // file name must be less than 8 characters.
 
   File dataFile = SD.open( fileName + ".txt", FILE_WRITE);
   if(dataFile){
@@ -70,8 +70,9 @@ void setup() {
 }
 
 void loop() {
-
+  
   smartDelay(100); // First(before the robot catch the GPS), the time is better longer than 1000ms
+  therm.read();
 /******************************************
  * Write the sensor information in the file
 ******************************************/
@@ -95,7 +96,7 @@ void loop() {
     dataFile.print(bme.readTemperature());  // Temperature(BME280)
     dataFile.print(",");
     dataFile.print(therm.ambient()); // Temperature(MLX90614)
-    dataFile.print(",");
+    dataFile.println("");
     // dataFile.print(tinyGPS.altitude.meters());  // Atitude(MPU9250)
     // dataFile.print(",");
     // dataFile.print(tinyGPS.altitude.meters());  // Atitude(MPU9250)
@@ -107,31 +108,32 @@ void loop() {
 /******************************************
  * Show the sensor information in Serial monitor.
 ******************************************/
-//  therm.read();
-//  Serial.print(tinyGPS.date.value()); // Date in DDMMYY format(GPS)
-//  Serial.print(",");
-//  Serial.print(tinyGPS.time.value()); // Time in HHMMSSCC format(GPS)
-//  Serial.print(",");
-//  Serial.print(tinyGPS.location.lat(),6);
-//  Serial.print(",");
-//  Serial.print(tinyGPS.location.lng(),6);
-//  Serial.print(",");
-//  Serial.print(tinyGPS.altitude.meters());
-//  Serial.print(",");
-//  Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
-//  Serial.print(",");
-//  Serial.print(bme.readHumidity());
-//  Serial.print(",");
-//  Serial.print(bme.readTemperature());
-//  Serial.print(",");
-//  Serial.print(therm.ambient());
+
+  Serial.print(tinyGPS.date.value()); // Date in DDMMYY format(GPS)
+  Serial.print(",");
+  Serial.print(tinyGPS.time.value()); // Time in HHMMSSCC format(GPS)
+  Serial.print(",");
+  Serial.print(tinyGPS.location.lat(),6);
+  Serial.print(",");
+  Serial.print(tinyGPS.location.lng(),6);
+  Serial.print(",");
+  Serial.print(tinyGPS.altitude.meters());
+  Serial.print(",");
+  Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
+  Serial.print(",");
+  Serial.print(bme.readHumidity());
+  Serial.print(",");
+  Serial.print(bme.readTemperature());
+  Serial.print(",");
+  Serial.println(therm.ambient());
+
 //  Serial.print(",");
 //  Serial.print(tinyGPS.altitude.meters());
 //  Serial.print(",");
 //  Serial.print(tinyGPS.altitude.meters());
 //  Serial.print(",");
 //  Serial.println(tinyGPS.altitude.meters());
-//  Serial.print("OK!");
+  Serial.print("OK!");
 
 }
 /*----------- End of main file  ---------------*/
